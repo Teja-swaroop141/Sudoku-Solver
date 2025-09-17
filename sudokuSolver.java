@@ -24,28 +24,24 @@ public class sudokuSolver {
         int n= board.length;
         int row=-1;
         int col=-1;
-        //to indicate empty box
-        boolean emptyLeft=true;//this means no empty box in the board
+        boolean emptyLeft=true;
         for (int i = 0; i < board.length ; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (board[i][j]==0){
                     row=i;
                     col=j;
-                    emptyLeft=false;//this means there are empty box in the board
+                    emptyLeft=false;
                     break;
                 }
             }
-            //if you found element in the row then break
             if(emptyLeft==false){
                 break;
             }
         }
-        //if empty left is true the sudoko is solved
         if(emptyLeft==true){
             return true;
         }
 
-        //backtrack
         for (int number = 1; number <=9 ; number++) {
             if(isSafe(board,row,col,number)){
                 board[row][col]=number;
@@ -71,21 +67,21 @@ public class sudokuSolver {
 
 
     static boolean isSafe(int[][] board,int row,int col,int n){
-        //checking row
+
         for (int i = 0; i < board.length; i++) {
             if(board[row][i]==n){
                 return false;
             }
         }
 
-        //checking coloumn
+
         for (int i = 0; i < board.length; i++) {
             if(board[i][col]==n){
                 return false;
             }
         }
 
-        //checking the box
+
         int term=(int)Math.sqrt(board.length);
         int brow=row-row%term;
         int bcol=col-col%term;
